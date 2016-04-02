@@ -35,6 +35,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Mount a directory for saving the puppet graphs to help visualise the dependencies
   config.vm.synced_folder ".vagrant/graphs/", "/home/vagrant/graphs", create: true
 
+  # Mount a directory for install files
+  config.vm.synced_folder "installers/", "/tmp/installers/", create: true
+  
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "manifests"
     puppet.module_path = "modules"
