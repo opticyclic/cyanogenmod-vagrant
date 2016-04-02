@@ -30,7 +30,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   # Mount a directory for saving the puppet graphs to help visualise the dependencies
   config.vm.synced_folder ".vagrant/graphs/", "/home/vagrant/graphs", create: true
-  
-  config.vm.provision :puppet
+
+  config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = "manifests"
+    puppet.module_path = "modules"
+    puppet.manifest_file = "default.pp"
+    puppet.options = ['--verbose', '--trace', '--graph', '--graphdir ./graphs']
+  end  
+
   config.ssh.forward_agent = true
 end
