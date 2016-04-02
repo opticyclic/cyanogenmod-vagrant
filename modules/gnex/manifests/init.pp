@@ -11,6 +11,27 @@ class gnex(){
     groups     => ['admin'],
     shell      => '/bin/bash';
   }
+  
+  #Create Xauth files to allow connecting to display with Xming
+  file { '/home/vagrant/.Xauthority':
+    ensure  => 'present',
+    replace => 'no', #Keep existing file if it already exists
+    content => '',
+    owner   => 'vagrant',
+    group   => 'vagrant',
+    mode    => '0644',
+    require => User['buildbot'],
+  }
+
+  file { '/home/buildbot/.Xauthority':
+    ensure  => 'present',
+    replace => 'no', #Keep existing file if it already exists
+    content => '',
+    owner   => 'buildbot',
+    group   => 'buildbot',
+    mode    => '0644',
+    require => User['buildbot'],
+  }
 
   exec { 'apt-get update':
     command => '/usr/bin/apt-get update',
