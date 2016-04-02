@@ -5,6 +5,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/trusty64"
   config.vm.box_version = "14.04"
 
+  config.vm.hostname = "buildenv"
+  config.ssh.forward_agent = true
+  config.ssh.forward_x11 = true
+  
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--memory", "4096"]
     # Work around OS X 10.10 host networking slowdowns
@@ -38,5 +42,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     puppet.options = ['--verbose', '--trace', '--graph', '--graphdir ./graphs']
   end  
 
-  config.ssh.forward_agent = true
 end
