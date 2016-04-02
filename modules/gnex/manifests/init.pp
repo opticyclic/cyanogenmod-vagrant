@@ -5,6 +5,13 @@ class gnex(){
     path => [ '/usr/bin', '/bin', '/usr/sbin']
   }
   
+  user { 'buildbot':
+    ensure     => present,
+    managehome => true,
+    groups     => ['admin'],
+    shell      => '/bin/bash';
+  }
+  
   Exec {
     path      => [
       '/usr/local/bin',
