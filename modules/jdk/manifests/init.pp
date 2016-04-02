@@ -1,4 +1,4 @@
-class jdk8(
+class jdk(
     $java_archive = 'jdk-8u77-linux-x64.tar.gz',
 	$java_url     = 'http://download.oracle.com/otn-pub/java/jdk/8u77-b03/jdk-8u77-linux-x64.tar.gz',
     $java_home    = '/usr/lib/jvm/jdk1.8.0_77',

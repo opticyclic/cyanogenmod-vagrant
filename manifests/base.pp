@@ -1,3 +1,3 @@
 include system-update
-include jdk8
+include jdk
 include gnex
