@@ -1,8 +1,8 @@
 class jdk(
-    $java_archive = 'jdk-8u77-linux-x64.tar.gz',
-	$java_url     = 'http://download.oracle.com/otn-pub/java/jdk/8u77-b03/jdk-8u77-linux-x64.tar.gz',
-    $java_home    = '/usr/lib/jvm/jdk1.8.0_77',
-    $java_folder  = 'jdk1.8.0_77')
+  $java_archive = 'jdk-7u80-linux-x64.tar.gz',
+  $java_url     = 'http://download.oracle.com/otn-pub/java/jdk/7u80-b15/jdk-7u80-linux-x64.tar.gz',
+  $java_home    = '/usr/lib/jvm/jdk1.7.0_80',
+  $java_folder  = 'jdk1.7.0_80')
 {
 
   Exec {
