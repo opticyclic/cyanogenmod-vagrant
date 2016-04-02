@@ -27,6 +27,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     error += "##############################################"
     raise error 
   end  
+  
+  # Mount a directory for saving the puppet graphs to help visualise the dependencies
+  config.vm.synced_folder ".vagrant/graphs/", "/home/vagrant/graphs", create: true
+  
   config.vm.provision :puppet
   config.ssh.forward_agent = true
 end
