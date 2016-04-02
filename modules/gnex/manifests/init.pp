@@ -120,9 +120,12 @@ class gnex(){
     require => Exec['install repo'],
   }
 
-  # repo init/sync:
-  # repo init -u git://github.com/CyanogenMod/android.git -b cm-11.0
-  # repo sync
+  exec { 'init repo':
+    cwd     => '/home/buildbot/android/system',
+    command => '/usr/local/repo init -u https://github.com/CyanogenMod/android.git -b cm-13.0',
+    creates => '/home/buildbot/android/system/.repo',
+    require => [ Package['dependencies'], File['/usr/local/repo'], File['create build dirs'], File['create gitconfig'] ]
+  }
 
   # get prebuilt
   # cd ~/android/system/vendor/cm
