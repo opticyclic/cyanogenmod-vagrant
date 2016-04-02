@@ -86,7 +86,19 @@ class gnex(){
     ]:
     ensure => installed,
   }
-    
+
+  #Make dirs for the build env
+  file { 'create build dirs':
+        [
+          '/home/buildbot/android',
+          '/home/buildbot/android/system'
+        ]:
+    ensure  => 'directory',
+    owner   => 'buildbot',
+    group   => 'buildbot',
+    require => User['buildbot'],
+  }
+
   exec { 'install repo':
     cwd     => '/usr/local/bin/',
     command => 'bash -c "wget http://commondatastorage.googleapis.com/git-repo-downloads/repo && chmod a+x repo"',
