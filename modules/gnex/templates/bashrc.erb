@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#Create a colourful prompt
+color_prompt=yes
+
+#Put the path in the title, put the bash history number in yellow and the current path in green
+PS1='\[\033]0;\w\a\]\[\033[32m\]\u@\h \[\033[33m\]\w\[\033[0m\]\$ '
+
+#Make directories pink so they are easier to see
+LS_COLORS='di=0;35';
+export LS_COLORS
+
+#Add colour output to some useful commands
+alias ls="ls --color"
+alias grep="grep --color"
+

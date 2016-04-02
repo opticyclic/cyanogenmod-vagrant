@@ -12,6 +12,16 @@ class gnex(){
     shell      => '/bin/bash';
   }
   
+  file { 'create .bashrc':
+    ensure  => present,
+    path    => '/home/buildbot/.bashrc',
+    content => template('buildbot/bashrc.erb'),
+    owner   => 'buildbot',
+    group   => 'buildbot',
+    mode    => '0755',
+    require => User['buildbot'],
+  }
+  
   #Create Xauth files to allow connecting to display with Xming
   file { '/home/vagrant/.Xauthority':
     ensure  => 'present',
