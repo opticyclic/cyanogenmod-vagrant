@@ -22,6 +22,15 @@ class gnex(){
     require => User['buildbot'],
   }
 
+  file { 'create gitconfig' :
+    ensure  => present,
+    content => '[user]\nemail = you@example.com\nname = Your Name\n[color]\nui = auto',
+    path    => '/home/buildbot/.gitconfig',
+    owner   => 'buildbot',
+    group   => 'buildbot',
+    require => User['buildbot'],
+  }
+
   #Create Xauth files to allow connecting to display with Xming
   file { '/home/vagrant/.Xauthority':
     ensure  => 'present',
@@ -109,12 +118,6 @@ class gnex(){
   file { '/usr/local/repo':
     mode    => '0775',
     require => Exec['install repo'],
-  }
-  
-  file { '/home/vagrant/.gitconfig' :
-    source => '/vagrant/gitconfig',
-    owner  => 'vagrant',
-    group  => 'vagrant'
   }
 
   # repo init/sync:
