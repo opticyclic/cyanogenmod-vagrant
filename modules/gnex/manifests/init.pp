@@ -127,6 +127,13 @@ class gnex(){
     require => [ Package['dependencies'], File['/usr/local/repo'], File['create build dirs'], File['create gitconfig'] ]
   }
 
+  #This takes a long time
+  exec { 'sync repo':
+    cwd     => '/home/buildbot/android/system',
+    command => '/usr/local/repo sync',
+    require => Exec['init repo']
+  }
+
   # get prebuilt
   # cd ~/android/system/vendor/cm
   # ./get-prebuilts
