@@ -15,6 +15,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ["modifyvm", :id, "--nictype1", "virtio"]
   end
 
+  # Cache apt packages on the host to save bandwidth
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.auto_detect = true
+  else
+    error = "\n"
+    error += "############################################## \n"
+    error += "  vagrant-cachier is not installed. \n"
+    error += "  Install it with: \n"
+    error += "    vagrant plugin install vagrant-cachier --plugin-version 0.5.1 \n"
+    error += "##############################################"
+    raise error 
+  end  
   config.vm.provision :puppet
   config.ssh.forward_agent = true
 end
