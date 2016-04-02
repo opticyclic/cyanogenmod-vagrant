@@ -1,5 +1,10 @@
+#Install packages necessary for compiling and clone the right repos
+class gnex(){
 
-class prep-android-build {
+  Exec {
+    path => [ '/usr/bin', '/bin', '/usr/sbin']
+  }
+  
   Exec {
     path      => [
       '/usr/local/bin',
@@ -76,5 +81,3 @@ class prep-android-build {
   # ./get-prebuilts
 
 }
-
-include prep-android-build
