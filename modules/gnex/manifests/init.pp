@@ -2,7 +2,7 @@
 class gnex(){
 
   Exec {
-    path => [ '/usr/bin', '/bin', '/usr/sbin']
+    path => [ '/usr/bin', '/bin']
   }
   
   user { 'buildbot':
@@ -10,18 +10,6 @@ class gnex(){
     managehome => true,
     groups     => ['admin'],
     shell      => '/bin/bash';
-  }
-  
-  Exec {
-    path      => [
-      '/usr/local/bin',
-      '/opt/local/bin',
-      '/usr/bin',
-      '/usr/sbin',
-      '/bin',
-      '/sbin',
-      ],
-    logoutput => false,
   }
 
   exec { 'apt-get update':
