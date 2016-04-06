@@ -104,7 +104,7 @@ class gnex(){
   }
 
   file { '/usr/local/repo':
-    mode    => '0775',
+    mode    => '0755',
     require => Exec['install repo'],
   }
 
