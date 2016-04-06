@@ -108,6 +108,20 @@ class gnex(){
     require => Exec['install repo'],
   }
 
+  #Make dirs for the build env
+  file { '/home/buildbot/android':
+    ensure  => 'directory',
+    owner   => 'buildbot',
+    group   => 'buildbot',
+    require => User['buildbot'],
+  }
+  file { '/home/buildbot/android/system':
+    ensure  => 'directory',
+    owner   => 'buildbot',
+    group   => 'buildbot',
+    require => File['/home/buildbot/android'],
+  }
+
   exec { 'init repo':
     cwd     => '/home/buildbot/android/system',
     command => '/usr/local/repo init -u https://github.com/CyanogenMod/android.git -b cm-13.0',
