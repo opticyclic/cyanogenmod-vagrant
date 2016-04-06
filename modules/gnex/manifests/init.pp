@@ -56,63 +56,51 @@ class gnex(){
     command => '/usr/bin/apt-get update',
   }
 
-  package { 'dependencies':
-    [
-      'bison',
-      'build-essential',
-      'ccache',
-      'curl',
-      'flex',
-      'g++-multilib',
-      'gcc-multilib',
-      'git',
-      'gnupg',
-      'gperf',
-      'lib32ncurses5-dev',
-      'lib32readline-gplv2-dev',
-      'lib32z1-dev',
-      'lib32z-dev',
-      'libc6-dev-i386',
-      'libesd0-dev',
-      'libgl1-mesa-dev',
-      'liblz4-tool',
-      'libncurses5-dev',
-      'libsdl1.2-dev',
-      'libwxgtk2.8-dev',
-      'libx11-dev',
-      'libxml2',
-      'libxml2-utils',
-      'lzop',
-      'maven',
-      'pngcrush',
-      'schedtool',
-      'squashfs-tools',
-      'unzip',
-      'x11proto-core-dev',
-      'xsltproc',
-      'zip',
-      'zlib1g-dev'
-    ]:
-    ensure => installed,
-  }
-
-  #Make dirs for the build env
-  file { 'create build dirs':
-        [
-          '/home/buildbot/android',
-          '/home/buildbot/android/system'
-        ]:
-    ensure  => 'directory',
-    owner   => 'buildbot',
-    group   => 'buildbot',
-    require => User['buildbot'],
+  $packages = [
+                'bison',
+                'build-essential',
+                'ccache',
+                'curl',
+                'flex',
+                'g++-multilib',
+                'gcc-multilib',
+                'git',
+                'gnupg',
+                'gperf',
+                'lib32ncurses5-dev',
+                'lib32readline-gplv2-dev',
+                'lib32z1-dev',
+                'lib32z-dev',
+                'libc6-dev-i386',
+                'libesd0-dev',
+                'libgl1-mesa-dev',
+                'liblz4-tool',
+                'libncurses5-dev',
+                'libsdl1.2-dev',
+                'libwxgtk2.8-dev',
+                'libx11-dev',
+                'libxml2',
+                'libxml2-utils',
+                'lzop',
+                'maven',
+                'pngcrush',
+                'schedtool',
+                'squashfs-tools',
+                'unzip',
+                'x11proto-core-dev',
+                'xsltproc',
+                'zip',
+                'zlib1g-dev'
+              ]
+  package { $packages:
+    ensure => 'installed',
+    notify => Exec['install repo']
   }
 
   exec { 'install repo':
     cwd     => '/usr/local/bin',
     command => 'curl https://storage.googleapis.com/git-repo-downloads/repo >repo',
     creates => '/usr/local/bin/repo',
-    require => Package['dependencies']
   }
 
   file { '/usr/local/repo':
