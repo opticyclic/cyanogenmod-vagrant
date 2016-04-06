@@ -129,10 +129,10 @@ class gnex(){
     require => [ File['/usr/local/repo'], File['create build dirs'], File['create gitconfig'] ]
   }
 
-  #This takes a long time
+  #This takes a long time (approx 5.5 GB)
   exec { 'sync repo':
     cwd     => '/home/buildbot/android/system',
-    command => '/usr/local/repo sync',
+    command => '/usr/local/bin/repo sync -j2 -c',
     require => Exec['init repo']
   }
 
