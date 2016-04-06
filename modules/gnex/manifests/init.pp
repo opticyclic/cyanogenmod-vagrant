@@ -124,9 +124,9 @@ class gnex(){
 
   exec { 'init repo':
     cwd     => '/home/buildbot/android/system',
-    command => '/usr/local/repo init -u https://github.com/CyanogenMod/android.git -b cm-13.0',
+    command => '/usr/local/bin/repo init -u https://github.com/CyanogenMod/android.git -b cm-13.0 --depth=1 --groups=all,-notdefault,-device,-darwin,-x86,-mips,-exynos5,-intel,-eclipse,-device',
     creates => '/home/buildbot/android/system/.repo',
-    require => [ Package['dependencies'], File['/usr/local/repo'], File['create build dirs'], File['create gitconfig'] ]
+    require => [ File['/usr/local/repo'], File['create build dirs'], File['create gitconfig'] ]
   }
 
   #This takes a long time
