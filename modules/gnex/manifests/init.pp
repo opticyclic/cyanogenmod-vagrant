@@ -136,6 +136,13 @@ class gnex(){
     require => Exec['init repo']
   }
 
+  #Put some extra commands on the PATH
+  exec { 'sync repo':
+    cwd     => '/home/buildbot/android/system',
+    command => 'source build/envsetup.sh',
+    require => Exec['sync repo']
+  }
+
   # get prebuilt
   # cd ~/android/system/vendor/cm
   # ./get-prebuilts
