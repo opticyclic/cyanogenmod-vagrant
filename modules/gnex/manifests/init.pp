@@ -15,7 +15,7 @@ class gnex(){
   file { 'create .bashrc':
     ensure  => present,
     path    => '/home/buildbot/.bashrc',
-    content => template('buildbot/bashrc.erb'),
+    content => template('gnex/bashrc.erb'),
     owner   => 'buildbot',
     group   => 'buildbot',
     mode    => '0755',
