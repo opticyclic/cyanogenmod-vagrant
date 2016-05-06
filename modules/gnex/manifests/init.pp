@@ -94,13 +94,13 @@ class gnex(){
               ]
   package { $packages:
     ensure => 'installed',
-    notify => Exec['install repo']
   }
 
   exec { 'install repo':
     cwd     => '/usr/local/bin',
     command => 'curl https://storage.googleapis.com/git-repo-downloads/repo >repo',
     creates => '/usr/local/bin/repo',
+    require => Package[$packages],
   }
 
   file { 'chmod repo':
