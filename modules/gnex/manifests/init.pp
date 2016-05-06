@@ -154,4 +154,11 @@ class gnex(){
     require => Exec['envsetup.sh'],
   }
 
+  #Compile the code
+  exec { 'brunch':
+    cwd     => '/home/buildbot/android/system',
+    command => 'brunch maguro',
+    require => File['copy roomservice.xml']
+  }
+
 }
