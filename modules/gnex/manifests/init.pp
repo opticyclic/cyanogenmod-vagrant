@@ -104,7 +104,7 @@ class gnex(){
   }
 
   file { 'chmod repo':
-    path    => '/usr/local/repo',
+    path    => '/usr/local/bin/repo',
     mode    => '0755',
     require => Exec['install repo'],
   }
