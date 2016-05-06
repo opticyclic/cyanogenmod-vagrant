@@ -143,8 +143,15 @@ class gnex(){
     require => Exec['sync repo']
   }
 
-  # get prebuilt
-  # cd ~/android/system/vendor/cm
-  # ./get-prebuilts
+  # Add Ziyans device tree
+  file { 'copy roomservice.xml' :
+    path   => "/home/buildbot/android/system/.repo/local_manifests/roomservice.xml",
+    ensure => 'present',
+    source => "puppet:///modules/gnex/roomservice.xml",
+    owner   => 'buildbot',
+    group   => 'buildbot',
+    mode   => '0600',
+    require => Exec['envsetup.sh'],
+  }
 
 }

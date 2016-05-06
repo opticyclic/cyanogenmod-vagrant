@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <project name="CyanogenMod/android_device_samsung_maguro" path="device/samsung/maguro" remote="github" />
+  <project name="CyanogenMod/android_kernel_samsung_tuna" path="kernel/samsung/tuna" remote="github" />
+  <project name="CyanogenMod/android_device_samsung_tuna" path="device/samsung/tuna" remote="github" />
+  <project name="Ziyann/proprietary_vendor_samsung" path="vendor/samsung" remote="github" />
+</manifest>
