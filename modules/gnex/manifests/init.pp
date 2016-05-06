@@ -115,7 +115,8 @@ class gnex(){
     group   => 'buildbot',
     require => User['buildbot'],
   }
-  file { '/home/buildbot/android/system':
+  file { 'create build dirs' :
+    path    => '/home/buildbot/android/system',
     ensure  => 'directory',
     owner   => 'buildbot',
     group   => 'buildbot',
