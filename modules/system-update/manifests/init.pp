@@ -5,8 +5,15 @@ class system-update()
     timeout => 3600;
   }
 
-  package {
-    ['dos2unix', 'htop', 'vim', 'x11-apps', 'libXtst6', 'libXi6', 'xauth', 'openjdk-7-jdk']:
-    ensure => installed,
+  $dependencies = ['dos2unix', 'htop', 'vim', 'x11-apps', 'libXtst6', 'libXi6', 'xauth', 'openjdk-7-jdk']
+  package { $dependencies:
+    ensure  => installed,
+    require => Exec['apt-get-update'],
   }
+  
+  exec { 'apt-get-autoremove':
+    command => '/usr/bin/apt-get -y autoremove',
+    timeout => 3600,
+    require => Package[$dependencies],
+  }  
 }
