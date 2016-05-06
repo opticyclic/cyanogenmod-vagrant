@@ -6,7 +6,7 @@ class system-update()
   }
 
   package {
-    ['dos2unix', 'htop', 'vim', 'x11-apps', 'libXtst6', 'libXi6', 'xauth']:
+    ['dos2unix', 'htop', 'vim', 'x11-apps', 'libXtst6', 'libXi6', 'xauth', 'openjdk-7-jdk']:
     ensure => installed,
   }
 }
