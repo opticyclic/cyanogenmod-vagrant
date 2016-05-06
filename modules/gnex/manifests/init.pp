@@ -128,31 +128,33 @@ class gnex(){
     cwd     => '/home/buildbot/android/system',
     command => '/usr/local/bin/repo init -u https://github.com/CyanogenMod/android.git -b cm-13.0 --depth=1 --groups=all,-notdefault,-device,-darwin,-x86,-mips,-exynos5,-intel,-eclipse,-device',
     creates => '/home/buildbot/android/system/.repo',
-    require => [ File['chmod repo'], File['create build dirs'], File['create gitconfig'] ]
+    require => [ File['chmod repo'], File['create build dirs'], File['create gitconfig'] ],
+    timeout => 0,
   }
 
   #This takes a long time (approx 5.5 GB)
   exec { 'sync repo':
     cwd     => '/home/buildbot/android/system',
     command => '/usr/local/bin/repo sync -j2 -c',
-    require => Exec['init repo']
+    require => Exec['init repo'],
+    timeout => 0,
   }
 
   #Put some extra commands on the PATH
   exec { 'envsetup.sh':
     cwd     => '/home/buildbot/android/system',
     command => 'source build/envsetup.sh',
-    require => Exec['sync repo']
+    require => Exec['sync repo'],
   }
 
   # Add Ziyans device tree
   file { 'copy roomservice.xml' :
-    path   => "/home/buildbot/android/system/.repo/local_manifests/roomservice.xml",
-    ensure => 'present',
-    source => "puppet:///modules/gnex/roomservice.xml",
+    path    => "/home/buildbot/android/system/.repo/local_manifests/roomservice.xml",
+    ensure  => 'present',
+    source  => "puppet:///modules/gnex/roomservice.xml",
     owner   => 'buildbot',
     group   => 'buildbot',
-    mode   => '0600',
+    mode    => '0600',
     require => Exec['envsetup.sh'],
   }
 
@@ -160,7 +162,8 @@ class gnex(){
   exec { 'brunch':
     cwd     => '/home/buildbot/android/system',
     command => 'brunch maguro',
-    require => File['copy roomservice.xml']
+    require => File['copy roomservice.xml'],
+    timeout => 0,
   }
 
 }
