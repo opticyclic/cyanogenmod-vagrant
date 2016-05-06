@@ -137,7 +137,7 @@ class gnex(){
   }
 
   #Put some extra commands on the PATH
-  exec { 'sync repo':
+  exec { 'envsetup.sh':
     cwd     => '/home/buildbot/android/system',
     command => 'source build/envsetup.sh',
     require => Exec['sync repo']
