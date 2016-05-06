@@ -103,7 +103,8 @@ class gnex(){
     creates => '/usr/local/bin/repo',
   }
 
-  file { '/usr/local/repo':
+  file { 'chmod repo':
+    path    => '/usr/local/repo',
     mode    => '0755',
     require => Exec['install repo'],
   }
@@ -127,7 +128,7 @@ class gnex(){
     cwd     => '/home/buildbot/android/system',
     command => '/usr/local/bin/repo init -u https://github.com/CyanogenMod/android.git -b cm-13.0 --depth=1 --groups=all,-notdefault,-device,-darwin,-x86,-mips,-exynos5,-intel,-eclipse,-device',
     creates => '/home/buildbot/android/system/.repo',
-    require => [ File['/usr/local/repo'], File['create build dirs'], File['create gitconfig'] ]
+    require => [ File['chmod repo'], File['create build dirs'], File['create gitconfig'] ]
   }
 
   #This takes a long time (approx 5.5 GB)
