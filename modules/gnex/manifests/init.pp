@@ -127,6 +127,8 @@ class gnex(){
   exec { 'init repo':
     cwd     => '/home/buildbot/android/system',
     command => '/usr/local/bin/repo init -u https://github.com/CyanogenMod/android.git -b cm-13.0 --depth=1 --groups=all,-notdefault,-device,-darwin,-x86,-mips,-exynos5,-intel,-eclipse,-device',
+    user    => 'buildbot',
+    group   => 'buildbot',
     creates => '/home/buildbot/android/system/.repo',
     require => [ File['chmod repo'], File['create build dirs'], File['create gitconfig'] ],
     timeout => 0,
@@ -136,6 +138,8 @@ class gnex(){
   exec { 'sync repo':
     cwd     => '/home/buildbot/android/system',
     command => '/usr/local/bin/repo sync -j2 -c',
+    user    => 'buildbot',
+    group   => 'buildbot',
     require => Exec['init repo'],
     timeout => 0,
   }
@@ -162,6 +166,8 @@ class gnex(){
   exec { 'brunch':
     cwd     => '/home/buildbot/android/system',
     command => 'brunch maguro',
+    user    => 'buildbot',
+    group   => 'buildbot',
     require => File['copy roomservice.xml'],
     timeout => 0,
   }
