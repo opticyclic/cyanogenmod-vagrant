@@ -145,12 +145,12 @@ class gnex(){
     require => Exec['init repo'],
   }
 
-  file { 'create local manifest dir' :
+  file { 'create local_manifests dir' :
     path    => '/home/buildbot/android/system/.repo/local_manifests',
     ensure  => 'directory',
     owner   => 'buildbot',
     group   => 'buildbot',
-    require => Exec['sync repo'],
+    require => Exec['init repo'],
   }
 
   # Add Ziyans device tree
@@ -161,7 +161,7 @@ class gnex(){
     owner   => 'buildbot',
     group   => 'buildbot',
     mode    => '0600',
-    require => File['create local manifest dir'],
+    require => File['create local_manifests dir'],
   }
 
   #Put some extra commands on the PATH and compile the code
