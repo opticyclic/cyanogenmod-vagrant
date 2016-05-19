@@ -166,12 +166,13 @@ class gnex(){
 
   #Put some extra commands on the PATH and compile the code
   exec { 'brunch':
-    cwd     => '/home/buildbot/android/system',
-    command => "/bin/bash -c 'source /home/buildbot/android/system/build/envsetup.sh;brunch maguro'",
-    user    => 'buildbot',
-    group   => 'buildbot',
-    timeout => 0,
-    require => Exec['sync repo'],
+    cwd         => '/home/buildbot/android/system',
+    environment => ["HOME=/home/buildbot", "USER=buildbot"],
+    command     => "/bin/bash -c 'source build/envsetup.sh;brunch maguro'",
+    user        => 'buildbot',
+    group       => 'buildbot',
+    timeout     => 0,
+    require     => Exec['sync repo'],
   }
 
 }
