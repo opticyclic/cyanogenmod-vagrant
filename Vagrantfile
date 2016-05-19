@@ -41,7 +41,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     puppet.manifests_path = "manifests"
     puppet.module_path = "modules"
     puppet.manifest_file = "base.pp"
-    puppet.options = ['--verbose', '--trace', '--graph', '--graphdir ./graphs']
+    puppet.options = ['--verbose', '--debug', '--trace', '--graph', '--graphdir ./graphs']
   end  
 
 end
