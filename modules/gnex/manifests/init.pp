@@ -2,7 +2,8 @@
 class gnex(){
 
   Exec {
-    path => [ '/usr/bin', '/bin']
+    path      => [ '/usr/bin', '/bin'],
+    logoutput => on_failure,
   }
 
   user { 'buildbot':
