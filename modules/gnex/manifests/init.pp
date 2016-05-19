@@ -130,8 +130,8 @@ class gnex(){
     user    => 'buildbot',
     group   => 'buildbot',
     creates => '/home/buildbot/android/system/.repo',
-    require => [ File['chmod repo'], File['create build dirs'], File['create gitconfig'] ],
     timeout => 0,
+    require => [ File['chmod repo'], File['create build dirs'], File['create gitconfig'] ],
   }
 
   #This takes a long time (approx 5.5 GB)
@@ -140,8 +140,8 @@ class gnex(){
     command => '/usr/local/bin/repo sync -j2 -c',
     user    => 'buildbot',
     group   => 'buildbot',
-    require => Exec['init repo'],
     timeout => 0,
+    require => Exec['init repo'],
   }
 
   file { 'create local manifest dir' :
@@ -169,8 +169,8 @@ class gnex(){
     command => 'brunch maguro',
     user    => 'buildbot',
     group   => 'buildbot',
-    require => File['copy roomservice.xml'],
     timeout => 0,
+    require => File['copy roomservice.xml'],
   }
 
 }
