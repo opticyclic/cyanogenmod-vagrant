@@ -163,10 +163,10 @@ class gnex(){
     require => File['create local manifest dir'],
   }
 
-  #Compile the code
+  #Put some extra commands on the PATH and compile the code
   exec { 'brunch':
     cwd     => '/home/buildbot/android/system',
-    command => 'brunch maguro',
+    command => "/bin/bash -c 'source /home/buildbot/android/system/build/envsetup.sh;brunch maguro'",
     user    => 'buildbot',
     group   => 'buildbot',
     timeout => 0,
