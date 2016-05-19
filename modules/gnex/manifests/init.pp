@@ -144,10 +144,11 @@ class gnex(){
     timeout => 0,
   }
 
-  #Put some extra commands on the PATH
-  exec { 'envsetup.sh':
-    cwd     => '/home/buildbot/android/system',
-    command => 'source build/envsetup.sh',
+  file { 'create local manifest dir' :
+    path    => '/home/buildbot/android/system/.repo/local_manifests',
+    ensure  => 'directory',
+    owner   => 'buildbot',
+    group   => 'buildbot',
     require => Exec['sync repo'],
   }
 
@@ -159,7 +160,7 @@ class gnex(){
     owner   => 'buildbot',
     group   => 'buildbot',
     mode    => '0600',
-    require => Exec['envsetup.sh'],
+    require => File['create local manifest dir'],
   }
 
   #Compile the code
