@@ -135,16 +135,6 @@ class gnex(){
     require => [ File['chmod repo'], File['create build dirs'], File['create gitconfig'] ],
   }
 
-  #This takes a long time (approx 5.5 GB)
-  exec { 'sync repo':
-    cwd     => '/home/buildbot/android/system',
-    command => '/usr/local/bin/repo sync -j2 -c',
-    user    => 'buildbot',
-    group   => 'buildbot',
-    timeout => 0,
-    require => Exec['init repo'],
-  }
-
   file { 'create local_manifests dir' :
     path    => '/home/buildbot/android/system/.repo/local_manifests',
     ensure  => 'directory',
@@ -164,6 +154,16 @@ class gnex(){
     require => File['create local_manifests dir'],
   }
 
+  #This takes a long time (approx 5.5 GB)
+  exec { 'sync repo':
+    cwd     => '/home/buildbot/android/system',
+    command => '/usr/local/bin/repo sync -j2 -c',
+    user    => 'buildbot',
+    group   => 'buildbot',
+    timeout => 0,
+    require => File['copy roomservice.xml'],
+  }
+
   #Put some extra commands on the PATH and compile the code
   exec { 'brunch':
     cwd     => '/home/buildbot/android/system',
@@ -171,7 +171,7 @@ class gnex(){
     user    => 'buildbot',
     group   => 'buildbot',
     timeout => 0,
-    require => File['copy roomservice.xml'],
+    require => Exec['sync repo'],
   }
 
 }
