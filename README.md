@@ -68,6 +68,23 @@ If you want to launch any GUI applications on the Vagrant box then you need to d
   * xauth add {paste the last line}
   * Run Xlaunch from desktop, use default settings	
 
+## Errors
+
+If you are on Windows 10 with Git Bash you might get the following error:
+
+    The box 'ubuntu/trusty64' could not be found or
+    could not be accessed in the remote catalog. If this is a private
+    box on HashiCorp's Atlas, please verify you're logged in via
+    `vagrant login`. Also, please double-check the name. The expanded
+    URL and error message are shown below:
+    
+    URL: ["https://atlas.hashicorp.com/ubuntu/trusty64"]
+    Error:
+
+The way to fix it is to copy curl from your git bash dir to the vagrant dir.
+
+    mv /c/HashiCorp/Vagrant/embedded/bin/curl.exe /c/HashiCorp/Vagrant/embedded/bin/curl.exe.bak
+    cp /mingw64/bin/curl.exe /c/HashiCorp/Vagrant/embedded/bin/curl.exe
 
 #Acknowledgements
 Thanks to the efforts of [CyanogenModBuildEnv] that got me going.
@@ -90,4 +107,3 @@ Thanks to the efforts of [CyanogenModBuildEnv] that got me going.
 [VirtualBox]: https://www.virtualbox.org/wiki/downloads/
 
 [Xming]: http://www.straightrunning.com/XmingNotes/
-
