@@ -25,7 +25,7 @@ class gnex(){
 
   file { 'create gitconfig' :
     ensure  => present,
-    content => '[user]\nemail = you@example.com\nname = Your Name\n[color]\nui = auto',
+    content => "[user]\nemail = you@example.com\nname = Your Name\n[color]\nui = auto",
     path    => '/home/buildbot/.gitconfig',
     owner   => 'buildbot',
     group   => 'buildbot',
