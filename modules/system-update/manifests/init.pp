@@ -15,5 +15,23 @@ class system-update()
     command => '/usr/bin/apt-get -y autoremove',
     timeout => 3600,
     require => Package[$dependencies],
+  }
+
+  #Add swap space as compiling uses a lot of RAM that we don't have in the VM
+  file { 'copy increase_swap.sh' :
+    path    => "/tmp/increase_swap.sh",
+    ensure  => 'present',
+    source  => "puppet:///modules/system-update/increase_swap.sh",
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0700',
+  }
+
+  exec { 'add swap':
+    cwd     => '/tmp',
+    command => '/tmp/increase_swap.sh',
+    user    => 'root',
+    group   => 'root',
+    require => File['copy increase_swap.sh'],
   }  
 }
