@@ -29,8 +29,27 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     error += "  Install it with: \n"
     error += "    vagrant plugin install vagrant-cachier --plugin-version 0.5.1 \n"
     error += "##############################################"
+    raise error
+  end
+
+  # In order to clone and compile we need more space than the base box has
+  if Vagrant.has_plugin?("vagrant-persistent-storage")
+    config.persistent_storage.enabled = true
+    config.persistent_storage.location = 'disk.vdi'
+    config.persistent_storage.size = 60000
+    config.persistent_storage.mountname = 'android'
+    config.persistent_storage.filesystem = 'ext4'
+    config.persistent_storage.mountpoint = '/home/buildbot/android'
+    config.persistent_storage.use_lvm = false
+  else
+    error = "\n"
+    error += "############################################## \n"
+    error += "  vagrant-persistent-storage is not installed. \n"
+    error += "  Install it with: \n"
+    error += "    vagrant plugin install vagrant-persistent-storage \n"
+    error += "##############################################"
     raise error 
-  end  
+  end
   
   # Mount a directory for saving the puppet graphs to help visualise the dependencies
   config.vm.synced_folder ".vagrant/graphs/", "/home/vagrant/graphs", create: true

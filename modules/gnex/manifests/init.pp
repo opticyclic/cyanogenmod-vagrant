@@ -12,6 +12,14 @@ class gnex(){
     groups     => ['admin'],
     shell      => '/bin/bash';
   }
+  #We have to do this as we are mounting a dir in the home dir before the user is created
+  file { 'Chgrp home dir' :
+    path    => '/home/buildbot',
+    ensure  => 'directory',
+    owner   => 'buildbot',
+    group   => 'buildbot',
+    require => User['buildbot'],
+  }
 
   file { 'create .bashrc':
     ensure  => present,
