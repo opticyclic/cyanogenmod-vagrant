@@ -16,10 +16,20 @@ class users()
     require => User['buildbot'],
   }
 
+  file { 'create .profile':
+    ensure  => present,
+    path    => '/home/buildbot/.profile',
+    source  => 'puppet:///modules/users/.profile',
+    owner   => 'buildbot',
+    group   => 'buildbot',
+    mode    => '0755',
+    require => User['buildbot'],
+  }
+
   file { 'create .bashrc':
     ensure  => present,
     path    => '/home/buildbot/.bashrc',
-    content => template('gnex/bashrc.erb'),
+    source  => 'puppet:///modules/users/.bashrc',
     owner   => 'buildbot',
     group   => 'buildbot',
     mode    => '0755',
