@@ -14,7 +14,7 @@ For more info on the build steps that this is automating for you see the [Cyanog
 * The first run will download an Ubuntu Server 14.04 base box. ~320 MB
 
 <sub>
-<a name="footnote1">1</a>: If you only have 4GB of RAM you need to modify this line in the Vagrantfile to 2750 `vb.customize ["modifyvm", :id, "--memory", "4096"]`
+<a name="footnote1">1</a>: If you only have 4GB of RAM you need to modify this line in the Vagrantfile to 2750 `vb.memory = 4096`
 <br/>
 <a name="footnote2">2</a>: You need at least Vagrant version 1.8.5 or you will hit this [vagrant issue]
 <br/>
@@ -43,7 +43,7 @@ For more info on the build steps that this is automating for you see the [Cyanog
 * Install vagrant-persistent-storage vagrant plugin for Vagrant (this creates and mounts an extra disk as the base box doesn't have enough space):
 
         vagrant plugin install vagrant-persistent-storage
-		
+
 * Start VirtualBox
 
 * Run `vagrant up` from the base directory of this project. 
